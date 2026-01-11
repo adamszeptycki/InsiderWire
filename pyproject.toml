@@ -1,0 +1,14 @@
+[project]
+name = "main-airframe"
+version = "0.1.0"
+description = "Add your description here"
+authors = [{ name = "Adam Szeptycki", email = "adamszeptycki@gmail.com" }]
+readme = "README.md"
+requires-python = "==3.11.*"
+dependencies = []
+
+[tool.uv.workspace]
+members = ["airframe"]
+
+[tool.uv.sources]
+sst = { git = "https://github.com/sst/sst.git", subdirectory = "sdk/python", branch = "dev" }

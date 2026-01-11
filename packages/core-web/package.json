@@ -1,0 +1,33 @@
+{
+	"name": "@starter/core-web",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"test": "vitest",
+		"dev": "sst dev next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"typecheck": "tsc --noEmit",
+		"storybook": "storybook dev -p 6006",
+		"build-storybook": "storybook build"
+	},
+	"dependencies": {
+		"@tanstack/react-query": "^5.81.5",
+		"@trpc/client": "^11.4.3",
+		"@trpc/react-query": "^11.4.3",
+		"@trpc/server": "^11.4.3",
+		"better-auth": "^1.2.12",
+		"drizzle-orm": "^0.44.2",
+		"react": "^19.1.0",
+		"react-dom": "^19",
+		"superjson": "^2.2.2",
+		"zod": "^4.1.12"
+	},
+	"devDependencies": {
+		"@types/react": "^19",
+		"@types/react-dom": "^19",
+		"typescript": "^5.6.2",
+		"vitest": "^3.2.4"
+	}
+}

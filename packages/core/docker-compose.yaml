@@ -1,0 +1,63 @@
+services:
+  core-airframe-db:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '5937:5432'
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+      POSTGRES_HOST_AUTH_METHOD: trust
+    command: >
+      postgres
+      -c max_connections=2000
+      -c shared_buffers=1GB
+      -c default_transaction_isolation='read committed'
+      -c idle_in_transaction_session_timeout=30000
+      -c lock_timeout=10000
+      -c statement_timeout=60000
+      -c deadlock_timeout=10000
+      -c max_locks_per_transaction=128
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - '6333:6333'
+      - '6334:6334'
+    restart: always
+    volumes:
+      - qdrant_data:/qdrant/storage
+    environment:
+      QDRANT__SERVICE__HTTP_PORT: 6333
+      QDRANT__SERVICE__GRPC_PORT: 6334
+  neo4j:
+    image: neo4j:5-community
+    ports:
+      - '7474:7474'  # HTTP
+      - '7687:7687'  # Bolt
+    restart: always
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+      - neo4j_import:/var/lib/neo4j/import
+      - neo4j_plugins:/plugins
+    environment:
+      NEO4J_AUTH: neo4j/password  # Default username: neo4j, password: password
+      NEO4J_dbms_memory_pagecache_size: 1G
+      NEO4J_dbms_memory_heap_initial__size: 1G
+      NEO4J_dbms_memory_heap_max__size: 1G
+      NEO4J_PLUGINS: '["apoc", "graph-data-science"]'  # Install APOC and GDS plugins
+      NEO4J_dbms_security_procedures_unrestricted: apoc.*,gds.*
+      NEO4J_dbms_security_procedures_allowlist: apoc.*,gds.*
+
+volumes:
+  db_data:
+  qdrant_data:
+  neo4j_data:
+  neo4j_logs:
+  neo4j_import:
+  neo4j_plugins:
+
+

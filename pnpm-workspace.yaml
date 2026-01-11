@@ -1,0 +1,19 @@
+packages:
+  - packages/**/*
+
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - '@swc/core'
+  - '@tailwindcss/oxide'
+  - aws-sdk
+  - core-js-pure
+  - better-sqlite3
+  - core-js-pure
+  - electron
+  - esbuild
+  - lmdb
+  - msgpackr-extract
+  - node-llama-cpp
+  - protobufjs
+  - sharp
+  - typeit

@@ -1,0 +1,40 @@
+mac-cert.p12
+
+# dependencies
+node_modules
+.pnpm-store
+
+# sst
+.sst
+
+# tmp files
+.#*
+
+# env 
+.env*
+.env.prod
+
+# opennext
+.open-next
+
+# misc
+.DS_Store
+
+# ext build
+packages/ext/dist
+packages/ext/dist_chrome
+
+# electron app build
+packages/app/out
+
+
+packages/core/src/sql/seed/*.json
+# storybook
+storybook-static
+
+# ts config build file
+tsconfig.tsbuildinfo
+.tsbuildinfo
+**/.tsbuildinfo
+
+packages/app/dist/

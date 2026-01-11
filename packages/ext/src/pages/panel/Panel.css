@@ -1,0 +1,575 @@
+@import "tailwindcss";
+
+@source "../../../../core-web/src";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+	--text-xs: 11px;
+	--text-sm: 13px;
+	--text-base: 15px;
+
+	--font-body: DM Sans, sans-serif;
+
+	/* Colors - automatically generates classes like bg-primary, text-primary-foreground, etc. */
+	/* Light mode colors (default) */
+	--color-background: hsl(0 0% 100%);
+	--color-foreground: hsl(0 0% 3.9%);
+	
+	--color-card: hsl(0 0% 100%);
+	--color-card-foreground: hsl(0 0% 3.9%);
+	
+	--color-popover: hsl(0 0% 100%);
+	--color-popover-foreground: hsl(0 0% 3.9%);
+	
+	--color-primary: hsl(0 0% 9%);
+	--color-primary-foreground: hsl(0 0% 98%);
+	
+	--color-secondary: hsl(0 0% 96.1%);
+	--color-secondary-foreground: hsl(0 0% 9%);
+	
+	--color-muted: hsl(0 0% 96.1%);
+	--color-muted-foreground: hsl(0 0% 45.1%);
+	
+	--color-accent: hsl(0 0% 96.1%);
+	--color-accent-foreground: hsl(0 0% 9%);
+	
+	--color-destructive: hsl(0 84.2% 60.2%);
+	--color-destructive-foreground: hsl(0 0% 98%);
+	
+	--color-border: hsl(0 0% 89.8%);
+	--color-input: hsl(0 0% 89.8%);
+	--color-ring: hsl(0 0% 3.9%);
+	
+	--radius: 0.5rem;
+}
+
+@utility container {
+	margin-inline: auto;
+	padding-inline: 1rem;
+	@media (width >= --theme(--breakpoint-sm)) {
+		max-width: none;
+	}
+	@media (width >= 640px) {
+		max-width: 640px;
+	}
+	@media (width >= 768px) {
+		max-width: 768px;
+	}
+	@media (width >= 1024px) {
+		max-width: 1024px;
+	}
+	@media (width >= 1280px) {
+		max-width: 1280px;
+	}
+	@media (width >= 1836px) {
+		max-width: 1836px;
+	}
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentColor);
+	}
+}
+
+@layer base {
+	.dark {
+		--color-background: hsl(0 0% 3.9%);
+		--color-foreground: hsl(0 0% 98%);
+		
+		--color-card: hsl(0 0% 3.9%);
+		--color-card-foreground: hsl(0 0% 98%);
+		
+		--color-popover: hsl(0 0% 3.9%);
+		--color-popover-foreground: hsl(0 0% 98%);
+		
+		--color-primary: hsl(0 0% 98%);
+		--color-primary-foreground: hsl(0 0% 9%);
+		
+		--color-secondary: hsl(0 0% 14.9%);
+		--color-secondary-foreground: hsl(0 0% 98%);
+		
+		--color-muted: hsl(0 0% 14.9%);
+		--color-muted-foreground: hsl(0 0% 63.9%);
+		
+		--color-accent: hsl(0 0% 14.9%);
+		--color-accent-foreground: hsl(0 0% 98%);
+		
+		--color-destructive: hsl(0 62.8% 30.6%);
+		--color-destructive-foreground: hsl(0 0% 98%);
+		
+		--color-border: hsl(0 0% 14.9%);
+		--color-input: hsl(0 0% 14.9%);
+		--color-ring: hsl(0 0% 83.1%);
+	}
+}
+
+/* Annotation Section Styles */
+.annotation-section {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.annotation-title {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.annotation-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  resize: vertical;
+  min-height: 100px;
+  background-color: white;
+  transition: border-color 0.2s ease;
+}
+
+.annotation-textarea:focus {
+  outline: none;
+  border-color: #4285f4;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.1);
+}
+
+.create-document-button {
+  margin-top: 12px;
+  width: 100%;
+  padding: 12px 20px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.create-document-button:hover:not(:disabled) {
+  background-color: #3367d6;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(66, 133, 244, 0.3);
+}
+
+.create-document-button:disabled {
+  background-color: #d0d0d0;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.message {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  animation: slideIn 0.3s ease;
+}
+
+.message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Audio Recorder Styles */
+.audio-recorder-section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.audio-recorder {
+  background-color: #f9fafb;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.audio-recorder.loading {
+  text-align: center;
+  color: #6b7280;
+}
+
+.audio-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #111827;
+}
+
+.permission-message {
+  color: #6b7280;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.permission-button {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.permission-button:hover {
+  background-color: #2563eb;
+}
+
+.tab-selection {
+  margin-bottom: 16px;
+}
+
+.info-message {
+  color: #6b7280;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.select-tab-button,
+.change-tab-button {
+  background-color: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.select-tab-button:hover,
+.change-tab-button:hover {
+  background-color: #e5e7eb;
+  cursor: pointer;
+}
+
+.select-tab-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.selected-tab {
+  background-color: #eff6ff;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.tab-info {
+  font-size: 14px;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.change-tab-button {
+  background-color: transparent;
+  border: none;
+  color: #3b82f6;
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.change-tab-button:hover {
+  background-color: #dbeafe;
+  cursor: pointer;
+}
+
+.recording-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.start-recording-button,
+.stop-recording-button {
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.start-recording-button {
+  background-color: #ef4444;
+  color: white;
+}
+
+.start-recording-button:hover {
+  background-color: #dc2626;
+  cursor: pointer;
+}
+
+.stop-recording-button {
+  background-color: #6b7280;
+  color: white;
+}
+
+.stop-recording-button:hover {
+  background-color: #4b5563;
+  cursor: pointer;
+}
+
+.recording-active {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.recording-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ef4444;
+  font-weight: 500;
+}
+
+.recording-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 14px;
+  margin-top: 8px;
+  padding: 8px 12px;
+  background-color: #fee2e2;
+  border-radius: 4px;
+}
+
+.audio-recording-preview {
+  background-color: #f0fdf4;
+  padding: 12px;
+  border-radius: 6px;
+  margin-top: 12px;
+}
+
+.audio-recording-preview p {
+  color: #15803d;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.audio-recording-preview audio {
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* Tab Selector Styles */
+.tab-selector-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.tab-selector-modal {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-selector-header {
+  padding: 20px;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tab-selector-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.tab-selector-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.tab-selector-close:hover {
+  background-color: #f3f4f6;
+  color: #111827;
+  cursor: pointer;
+}
+
+.tab-selector-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.tab-selector-loading,
+.tab-selector-empty {
+  padding: 40px;
+  text-align: center;
+  color: #6b7280;
+}
+
+.tab-selector-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.tab-selector-item:hover {
+  background-color: #f3f4f6;
+  cursor: pointer;
+}
+
+.tab-selector-item.audible {
+  background-color: #fef3c7;
+  border-color: #fbbf24;
+}
+
+.tab-selector-item.audible:hover {
+  background-color: #fde68a;
+  cursor: pointer;
+}
+
+.tab-selector-favicon {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.tab-selector-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.tab-selector-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tab-selector-url {
+  font-size: 12px;
+  color: #6b7280;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.tab-selector-audio-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #f59e0b;
+  font-size: 12px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.tab-selector-footer {
+  padding: 12px 20px;
+  border-top: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  border-radius: 0 0 12px 12px;
+}
+
+.tab-selector-hint {
+  margin: 0;
+  font-size: 12px;
+  color: #6b7280;
+  text-align: center;
+}

@@ -1,0 +1,167 @@
+[
+  {
+    "vertical": "manufacturing",
+    "stages": [
+      {
+        "name": "Opener",
+        "script": "- 🔗 Reference prior LinkedIn interaction to warm the call.\n- ⏱️ Set expectation: short call, not a pitch.\n- 📋 Share agenda: understand resourcing, share best practices, offer free consult with senior AI engineer (Samsung/Panasonic)."
+      },
+      {
+        "name": "Discovery",
+        "script": "- 🔍 Ask how predictive maintenance/defect detection is currently resourced.\n- 🚧 Identify bottlenecks: bandwidth, slow hiring, dependence on SI vendors.\n- 🔎 Probe past issues with contractors: quality, communication, shop-floor context."
+      },
+      {
+        "name": "Positioning",
+        "script": "- 💡 Explain tech-lead-driven recruiting and 2-hour live pair-programming.\n- ✨ Highlight top 2% global engineers, real manufacturing problem evaluations.\n- 🌍 Emphasize timezone overlap and strong communication filtering."
+      },
+      {
+        "name": "Use Case Alignment",
+        "script": "- 🎯 Ask for the one high-impact initiative in next 6–9 months.\n- 🔗 Tie tiger-team model to cross-plant predictive maintenance rollout.\n- 🤝 Explain handoff and long-term model ownership support."
+      },
+      {
+        "name": "Free Consultation CTA",
+        "script": "- 🎁 Offer free 45-minute consult with senior AI engineer (Samsung/Panasonic, published).\n- 📊 Explain consult outcomes: architecture sanity check, improvements, bottleneck mapping.\n- ✅ Confirm they can bring data/IT lead to that call."
+      },
+      {
+        "name": "Low-Cost Architect CTA",
+        "script": "- 🏗️ If consult shows alignment, offer forward-deployed AI architect.\n- 📦 Architect produces full project plan, architecture diagrams, staffing/cost.\n- 💰 Normally $50k, offered for $5k; client owns deliverable to shop or use internally."
+      },
+      {
+        "name": "Close",
+        "script": "- 📅 Propose scheduling the free consult.\n- 🗓️ Give two time options.\n- 📧 Promise to send agenda and engineer bio."
+      }
+    ]
+  },
+  {
+    "vertical": "healthcare",
+    "stages": [
+      {
+        "name": "Opener",
+        "script": "- 🔗 Reference LinkedIn thread on readmissions/capacity.\n- 📋 Set expectation: discovery + best practices + optional free consult.\n- 💬 Reassure: no obligation, short call."
+      },
+      {
+        "name": "Discovery",
+        "script": "- 👥 Ask about team size across DS/DE/analytics.\n- 🚧 Identify constraints: cleaning EHR data, compliance slowdowns.\n- 🔍 Explore challenges with vendor lists, SIs, offshore concerns."
+      },
+      {
+        "name": "Positioning",
+        "script": "- 🔒 Explain engineers work inside client-controlled VPC with BAA.\n- ✨ Highlight healthcare-specific pair-program exercises (bias, EHR extracts).\n- 📈 Mention proven placements and long tenure numbers."
+      },
+      {
+        "name": "Use Case Alignment",
+        "script": "- 🎯 Ask which single outcome matters most (readmissions, bed forecasting).\n- 🔗 Connect tiger team model to production-grade risk models.\n- 🤝 Explain handoff and MLOps lifecycle plan."
+      },
+      {
+        "name": "Free Consultation CTA",
+        "script": "- 🎁 Offer free 45-minute consult with senior AI engineer (Samsung/Panasonic + published).\n- 📊 Explain they will map readmission/capacity architecture and compliance-safe approaches.\n- 👋 Invite clinical/InfoSec stakeholders to join."
+      },
+      {
+        "name": "Low-Cost Architect CTA",
+        "script": "- 🏗️ If aligned after consult, offer $5k architect engagement.\n- 📦 Deliverables: architecture, data flows, retrain process, compliance blueprint, cost model.\n- 💰 Normally priced at $50k."
+      },
+      {
+        "name": "Close",
+        "script": "- 📅 Propose exact time for free consult.\n- ✅ Confirm participants.\n- 📧 Send bio and example outline."
+      }
+    ]
+  },
+  {
+    "vertical": "retail",
+    "stages": [
+      {
+        "name": "Opener",
+        "script": "- 🔗 Reference LinkedIn interaction around personalization or promo science.\n- 📋 Set agenda for quick discovery + best practices + optional free consult."
+      },
+      {
+        "name": "Discovery",
+        "script": "- 🔍 Ask how personalization/forecasting backlog is currently resourced.\n- 🚧 Identify friction points: vendor limits, massive backlog, offshore failures.\n- 🛠️ Check stack: Snowflake, Shopify, Klaviyo, dbt."
+      },
+      {
+        "name": "Positioning",
+        "script": "- 💡 Explain deep pair-programming tailored to retail ML tasks (uplift, ranking).\n- ✨ Highlight top global engineers, long tenure, cost efficiency.\n- 🌍 Clarify overlap hours and communication expectations."
+      },
+      {
+        "name": "Use Case Alignment",
+        "script": "- 🎯 Ask which KPI matters most (conversion, margin, promo efficiency).\n- 🔗 Tie tiger team model to measurable uplift opportunities.\n- 👥 Outline team options: ML + DE + analytics engineer."
+      },
+      {
+        "name": "Free Consultation CTA",
+        "script": "- 🎁 Offer free consult with senior AI engineer (Samsung/Panasonic + published).\n- 📊 Scope: personalization strategy, forecasting tradeoffs, realistic ML roadmap.\n- 👋 Invite analytics and marketing stakeholders."
+      },
+      {
+        "name": "Low-Cost Architect CTA",
+        "script": "- 🏗️ If aligned, offer $5k architect scoping.\n- 📦 Produce blueprint: promo optimization architecture, data flows, KPIs, staffing, cost scenarios.\n- 💰 Normally $50k."
+      },
+      {
+        "name": "Close",
+        "script": "- 📅 Lock a time for the free consult.\n- 📧 Mention pre-read will include engineer bio and agenda."
+      }
+    ]
+  },
+  {
+    "vertical": "b2b_saas",
+    "stages": [
+      {
+        "name": "Opener",
+        "script": "- 🔗 Reference prior interaction about building AI co-pilot.\n- 📋 Set concise agenda and clarify no heavy pitch."
+      },
+      {
+        "name": "Discovery",
+        "script": "- 🔍 Ask about hiring funnel: internal TA, interview bottlenecks.\n- 🚧 Identify pain: senior engineers overloaded with interviews.\n- 🔎 Probe past issues with contractors or offshore."
+      },
+      {
+        "name": "Positioning",
+        "script": "- 💡 Explain tech-lead-run 2-hour pair-programming (multi-tenant design, RAG flows).\n- ✨ Highlight top 2% engineers and strong communication standards.\n- 💬 Clarify permanent hires vs tiger teams."
+      },
+      {
+        "name": "Use Case Alignment",
+        "script": "- 🎯 Ask what AI milestone they must hit next (co-pilot v1, etc.).\n- 📈 Show how a tiger team accelerates roadmap while hiring catches up."
+      },
+      {
+        "name": "Free Consultation CTA",
+        "script": "- 🎁 Offer free consult with senior AI engineer (Samsung/Panasonic + published).\n- 🛠️ Use session to explore architecture, ML strategy, staffing needs.\n- 👋 Encourage including Head of Product."
+      },
+      {
+        "name": "Low-Cost Architect CTA",
+        "script": "- 🏗️ If aligned, offer $5k architect scoping.\n- 📦 Deliver blueprint: architecture, roadmap, risks, build-vs-buy, cost.\n- 💰 Normally $50k."
+      },
+      {
+        "name": "Close",
+        "script": "- 📅 Offer two time slots for the free consult.\n- 📧 Send pre-read and engineer bio."
+      }
+    ]
+  },
+  {
+    "vertical": "finance",
+    "stages": [
+      {
+        "name": "Opener",
+        "script": "- 🔗 Reference LinkedIn thread on market-data pipeline issues.\n- 📋 Set expectation: fast discovery + best practices + optional free consult."
+      },
+      {
+        "name": "Discovery",
+        "script": "- 🚧 Identify bottlenecks: latency, data quality, risk aggregation, hiring challenges.\n- 🔎 Probe prior failed offshore attempts and confidentiality concerns.\n- 🔒 Understand partner expectations and security requirements."
+      },
+      {
+        "name": "Positioning",
+        "script": "- 💡 Explain 2-hour pair-programming testing finance-specific skills.\n- 🔐 Clarify engineers work inside client-controlled environments with strict IP rules.\n- ✨ Highlight tenure, cost savings, and engineering quality."
+      },
+      {
+        "name": "Use Case Alignment",
+        "script": "- 🎯 Ask which outcome matters most (data stability, analytics reliability, feature engineering).\n- 📈 Show tiger team benefits for ingestion, risk/PnL aggregation, forecasting."
+      },
+      {
+        "name": "Free Consultation CTA",
+        "script": "- 🎁 Offer free consult with senior AI engineer (Samsung/Panasonic + published).\n- 🔍 Focus on architecture sense-check and bottleneck analysis.\n- 👋 Invite PM or partner sponsor."
+      },
+      {
+        "name": "Low-Cost Architect CTA",
+        "script": "- 🏗️ If aligned, offer $5k architect scope.\n- 📦 Blueprint: architecture, latency/risk trade-offs, staffing plans, cost scenarios.\n- 💰 Normally $50k."
+      },
+      {
+        "name": "Close",
+        "script": "- 📅 Propose time for the free consult.\n- 📧 Explain pre-read will include engineer bio and scope outline."
+      }
+    ]
+  }
+]

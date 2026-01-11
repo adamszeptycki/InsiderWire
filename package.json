@@ -1,0 +1,33 @@
+{
+  "name": "starter",
+  "productName": "Starter",
+  "version": "0.0.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:adam": "dotenvx run -f .env.dev -- sst dev --stage adam",
+    "deploy:prod": "sst deploy --stage prod",
+    "typecheck": "pnpm -r run typecheck",
+    "test": "pnpm -r run test",
+    "dev:ext": "pnpm -r run dev --filter ext",
+    "db:migrate:prod": "pnpm --filter @einstein/core db:migrate:prod",
+    "db:migrate:local": "pnpm --filter @einstein/core db:migrate:local",
+    "db:nuke:up": "pnpm --filter @einstein/core db:nuke:up",
+    "db:generate:migrations": "pnpm --filter @einstein/core db:generate:migrations"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.1.1",
+    "@tailwindcss/postcss": "^4.1.11",
+    "@tsconfig/node22": "^22",
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.2.4",
+    "vitest-fetch-mock": "^0.4.5"
+  },
+  "dependencies": {
+    "postcss": "^8.5.6",
+    "sst": "^3",
+    "tailwindcss": "^4.1.11"
+  }
+}
