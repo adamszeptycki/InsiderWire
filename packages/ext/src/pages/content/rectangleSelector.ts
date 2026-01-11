@@ -129,7 +129,7 @@ export class RectangleSelector {
     
     allElements.forEach(element => {
       // Skip our own overlay elements
-      if (element === this.overlay || element === this.selectionBox || element.closest('#__airframe-selector-overlay')) {
+      if (element === this.overlay || element === this.selectionBox || element.closest('#__insiderwire-selector-overlay')) {
         return;
       }
 
@@ -164,7 +164,7 @@ export class RectangleSelector {
         // Add highlight
         (element as HTMLElement).style.outline = '2px solid #4285f4';
         (element as HTMLElement).style.outlineOffset = '-2px';
-        (element as HTMLElement).dataset.airframeSelected = 'true';
+        (element as HTMLElement).dataset.insiderwireSelected = 'true';
         
         this.selectedElements.push(element);
       }
@@ -172,10 +172,10 @@ export class RectangleSelector {
   }
 
   private clearHighlights() {
-    document.querySelectorAll('[data-airframe-selected="true"]').forEach(element => {
+    document.querySelectorAll('[data-insiderwire-selected="true"]').forEach(element => {
       (element as HTMLElement).style.outline = '';
       (element as HTMLElement).style.outlineOffset = '';
-      delete (element as HTMLElement).dataset.airframeSelected;
+      delete (element as HTMLElement).dataset.insiderwireSelected;
     });
   }
 
@@ -184,7 +184,7 @@ export class RectangleSelector {
     const clonedElements = this.selectedElements.map(el => {
       const clone = el.cloneNode(true) as HTMLElement;
       // Remove our selection attributes
-      delete clone.dataset.airframeSelected;
+      delete clone.dataset.insiderwireSelected;
       clone.style.outline = '';
       clone.style.outlineOffset = '';
       return clone;
@@ -205,7 +205,7 @@ export class RectangleSelector {
       this.overlay.style.width = `${Math.max(document.documentElement.scrollWidth, document.body.scrollWidth)}px`;
       this.overlay.style.height = `${Math.max(document.documentElement.scrollHeight, document.body.scrollHeight)}px`;
       this.overlay.style.display = 'block';
-      this.overlay.id = '__airframe-selector-overlay';
+      this.overlay.id = '__insiderwire-selector-overlay';
     }
   }
 

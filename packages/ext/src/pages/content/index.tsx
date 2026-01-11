@@ -70,7 +70,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 // Create a floating button for easy selection start
 const floatingButton = document.createElement('div');
-floatingButton.id = '__airframe-floating-button';
+floatingButton.id = '__insiderwire-floating-button';
 floatingButton.innerHTML = `
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M3 3h7v7H3V3zm11 0h7v7h-7V3zM3 14h7v7H3v-7zm11 0h7v7h-7v-7z" fill="currentColor"/>
@@ -110,4 +110,4 @@ if (oldRoot) {
   oldRoot.remove();
 }
 
-console.log('AirFrame content script loaded - Rectangle selection ready');
+console.log('InsiderWire content script loaded - Rectangle selection ready');

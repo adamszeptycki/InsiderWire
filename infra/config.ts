@@ -4,7 +4,7 @@ export const betterAuthSecret = new sst.Secret(
 );
 export const dbUrl = new sst.Secret(
 	"DB_URL",
-	"postgres://postgres:postgres@localhost:5937/airframe",
+	"postgres://postgres:postgres@localhost:5937/insiderwire",
 );
 export const resendApiKey = new sst.Secret(
 	"RESEND_API_KEY",

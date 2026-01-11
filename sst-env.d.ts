@@ -105,11 +105,11 @@ declare module "sst" {
       "type": "sst.sst.Secret"
       "value": string
     }
-    "AirFrameRouter": {
+    "InsiderWireRouter": {
       "type": "sst.aws.Router"
       "url": string
     }
-    "AirFrameWeb": {
+    "InsiderWireWeb": {
       "type": "sst.aws.Nextjs"
       "url": string
     }

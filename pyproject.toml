@@ -1,5 +1,5 @@
 [project]
-name = "main-airframe"
+name = "main-insiderwire"
 version = "0.1.0"
 description = "Add your description here"
 authors = [{ name = "Adam Szeptycki", email = "adamszeptycki@gmail.com" }]
@@ -8,7 +8,7 @@ requires-python = "==3.11.*"
 dependencies = []
 
 [tool.uv.workspace]
-members = ["airframe"]
+members = ["insiderwire"]
 
 [tool.uv.sources]
 sst = { git = "https://github.com/sst/sst.git", subdirectory = "sdk/python", branch = "dev" }

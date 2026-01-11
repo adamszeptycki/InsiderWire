@@ -9,8 +9,8 @@ resolution-markers = [
 
 [manifest]
 members = [
-    "airframe",
-    "main-airframe",
+    "insiderwire",
+    "main-insiderwire",
 ]
 
 [[package]]
@@ -394,9 +394,9 @@ wheels = [
 ]
 
 [[package]]
-name = "airframe"
+name = "insiderwire"
 version = "0.1.0"
-source = { editable = "airframe" }
+source = { editable = "insiderwire" }
 dependencies = [
     { name = "docling" },
     { name = "markitdown", extra = ["all"] },
@@ -657,7 +657,7 @@ wheels = [
 ]
 
 [[package]]
-name = "main-airframe"
+name = "main-insiderwire"
 version = "0.1.0"
 source = { virtual = "." }
 

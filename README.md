@@ -49,7 +49,7 @@ BETTER_AUTH_URL=https://localhost:3000
   - `packages/core-web/src/auth/invitation/email.ts`
   - `packages/web/src/server/auth/email.ts`
 - Middleware/instrumentation are minimal; extend as needed.
-# Lucidiant (AirFrame) 🧠
+# Lucidiant (InsiderWire) 🧠
 
 An AI-powered document processing and chat application with RAG (Retrieval-Augmented Generation) capabilities and visual workflow automation. Transform your business data into actionable insights through natural language queries and automated data pipelines.
 
@@ -103,13 +103,13 @@ Build visual data pipelines with 60+ pre-built integrations:
 │   ├── ext/                 # Chrome extension (development/may be abandoned)
 │   ├── functions/           # AWS Lambda functions for background processing
 ├── infra/                   # SST infrastructure configuration
-├── airframe/                # Python FastAPI backend for document processing
+├── insiderwire/                # Python FastAPI backend for document processing
 └── [Root workspace files]
 ```
 
 ### Package Details
 
-- **`@airframe/core`**: Database schemas (Drizzle), domain logic, AI utilities, queue handlers
+- **`@insiderwire/core`**: Database schemas (Drizzle), domain logic, AI utilities, queue handlers
 - **`core-web`**: Shared React components, authentication, tRPC API routers, UI library
 - **`web`**: Main Next.js application with dashboard, chat interface, and workflow builder
 - **`ext`**: Browser extension for content extraction (currently under development)
@@ -129,7 +129,7 @@ Build visual data pipelines with 60+ pre-built integrations:
 
 ```bash
 git clone [repository-url]
-cd airframe
+cd insiderwire
 pnpm install
 ```
 
@@ -154,10 +154,10 @@ Required environment variables:
 
 ```bash
 # Start local PostgreSQL with Docker
-pnpm --filter @airframe/core db:nuke:up
+pnpm --filter @insiderwire/core db:nuke:up
 
 # Run database migrations
-pnpm --filter @airframe/core db:migrate:local
+pnpm --filter @insiderwire/core db:migrate:local
 ```
 
 ### 4. Development
@@ -173,7 +173,7 @@ pnpm dev:adam
 pnpm typecheck
 
 # Run tests
-pnpm --filter @airframe/core test
+pnpm --filter @insiderwire/core test
 ```
 
 ### 5. Chrome Extension Development (Optional)
@@ -190,10 +190,10 @@ pnpm dev:ext
 ### Database Operations
 ```bash
 # Reset database and run migrations
-pnpm --filter @airframe/core db:nuke:up:migrate
+pnpm --filter @insiderwire/core db:nuke:up:migrate
 
 # Generate new migration
-pnpm --filter @airframe/core db:generate:migrations
+pnpm --filter @insiderwire/core db:generate:migrations
 
 # Run migrations on production
 pnpm db:migrate:prod
@@ -211,7 +211,7 @@ pnpm deploy:adam
 ### Package-specific Commands
 ```bash
 # Run specific package commands
-pnpm --filter @airframe/core [command]
+pnpm --filter @insiderwire/core [command]
 pnpm --filter web [command]
 pnpm --filter ext [command]
 ```
@@ -223,7 +223,7 @@ pnpm --filter ext [command]
 1. **Domain Logic**: Add core functionality to `packages/core/src/domain/`
 2. **Database Changes**: 
    - Update schemas in `packages/core/src/sql/schema/`
-   - Generate migrations: `pnpm --filter @airframe/core db:generate:migrations`
+   - Generate migrations: `pnpm --filter @insiderwire/core db:generate:migrations`
 3. **API Endpoints**: Add tRPC routers in `packages/core-web/src/trpc/routers/`
 4. **UI Components**: Create reusable components in `packages/core-web/src/components/`
 5. **Pages**: Add Next.js pages/routes in `packages/web/src/app/`
@@ -243,7 +243,7 @@ pnpm --filter ext [command]
 pnpm test
 
 # Run core package tests with SST shell
-pnpm --filter @airframe/core test
+pnpm --filter @insiderwire/core test
 
 # Run tests in specific package
 pnpm --filter [package-name] test
@@ -275,7 +275,7 @@ The application uses SST v3 for infrastructure as code, automatically provisioni
 1. **Database Connection Issues**
    ```bash
    # Reset local database
-   pnpm --filter @airframe/core db:nuke:up:migrate
+   pnpm --filter @insiderwire/core db:nuke:up:migrate
    ```
 
 2. **TypeScript Errors**
@@ -330,7 +330,7 @@ pnpm run db:up && pnpm run db:migrate:local
 4. Configure your aws account. You will need Access Key to manager resources on AWS. This project requires AWS account to run it locally.
 5. Create .env.dev file in top level folder:
 `
-DATABASE_URL=postgres://postgres:postgres@localhost:5937/airframe
+DATABASE_URL=postgres://postgres:postgres@localhost:5937/insiderwire
 BETTER_AUTH_URL=https://localhost:3000
 BETTER_AUTH_SECRET=ABB8qCQN85Gw6WsfDzadjlS7jjGgpY6yRBCb1WXLURjwpoi1mtwLZbNNu0KBg3SgRfuce5GOJeSweuDAeQ
 `

@@ -1,11 +1,11 @@
-# @airframe/types
+# @insiderwire/types
 
-Shared schema definitions using Zod for the AirFrame project.
+Shared schema definitions using Zod for the InsiderWire project.
 
 ## Usage
 
 ```typescript
-import { exampleSchema } from '@airframe/types'
+import { exampleSchema } from '@insiderwire/types'
 
 // Use the schema for validation
 const data = exampleSchema.parse({

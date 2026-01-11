@@ -81,10 +81,10 @@ class Resource:
     class EMAIL_FROM_SUPPORT:
         type: str
         value: str
-    class AirFrameRouter:
+    class InsiderWireRouter:
         type: str
         url: str
-    class AirFrameWeb:
+    class InsiderWireWeb:
         type: str
         url: str
     class EmbeddingsQueue:

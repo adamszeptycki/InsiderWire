@@ -1,5 +1,5 @@
 /**
- * @airframe/types
+ * @insiderwire/types
  * 
  * Shared schema definitions using Zod
  */

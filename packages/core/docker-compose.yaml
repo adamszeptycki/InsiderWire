@@ -1,5 +1,5 @@
 services:
-  core-airframe-db:
+  core-insiderwire-db:
     build:
       context: .
       dockerfile: Dockerfile
