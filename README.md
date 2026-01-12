@@ -1,348 +1,410 @@
-# Starter Template
+# InsiderWire 📊
 
-Minimal monorepo scaffold with Better Auth, tRPC, Drizzle, Next.js, and SST v3.
-Use this as a clean starting point for new projects.
+An intelligent insider trading signal bot that monitors SEC Form 4 filings, calculates proprietary signal scores, and delivers real-time alerts via Slack with a comprehensive web dashboard.
 
-## Stack
-- Frontend: Next.js 15, React, Tailwind
-- Auth: Better Auth (email/password) with organizations
-- API: tRPC
-- DB: Postgres + Drizzle ORM
-- Infra: SST v3 (Next.js site only)
-- Extension: browser extension shell (no backend coupling)
+## Features
 
-## Packages
-- `packages/core` — Drizzle schema (auth tables), DB access
-- `packages/core-web` — Better Auth config, tRPC context/routers (user, organization)
-- `packages/web` — Next.js app (auth pages, onboarding shell, dashboard shell)
-- `packages/ext` — extension shell
+- **Automated SEC Form 4 Polling**: Fetches and parses insider trading filings every 2 hours
+- **Intelligent Signal Scoring**: Multi-factor scoring algorithm considering transaction size, role, timing, and clustering
+- **Real-time Slack Alerts**: Urgent notifications for high-score transactions
+- **Daily Digest**: End-of-day summary of all insider trading activity
+- **Web Dashboard**: Search, filter, and analyze historical insider transactions
+- **90-Day Context**: Track insider activity trends over time
 
-## Setup
-```bash
-pnpm install
-```
+## Documentation
 
-Set env (example):
-```
-BETTER_AUTH_SECRET=dev-secret
-RESEND_API_KEY=stub
-DB_URL=postgres://postgres:postgres@localhost:5937/starter
-NEXT_PUBLIC_BASE_URL=https://localhost:3000
-BETTER_AUTH_URL=https://localhost:3000
-```
+- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Detailed architecture documentation with diagrams
+- **[PARSER_EXPLAINED.md](./PARSER_EXPLAINED.md)** - How the Form 4 XML parser works (with examples)
+- **[IMPLEMENTATION_SUMMARY.md](./IMPLEMENTATION_SUMMARY.md)** - Complete summary of everything built
+- **[SPECS.MD](./SPECS.MD)** - Product specifications and requirements
+- **[CLAUDE.md](./CLAUDE.md)** - Development guidelines for AI assistance
 
-## Scripts
-- `pnpm dev` — start Next.js (via SST) for web
-- `pnpm typecheck` — type check all packages
-- `pnpm test` — run tests (none included yet)
+## Architecture
 
-## Database
-- Drizzle config in `packages/core`
-- Migrations directory is empty; generate your own:
-  ```bash
-  pnpm --filter @starter/core db:generate:migrations
-  pnpm --filter @starter/core db:migrate:local
-  ```
+### Technology Stack
 
-## Notes
-- Email/invitation sending is stubbed; integrate your provider in:
-  - `packages/core-web/src/auth/invitation/email.ts`
-  - `packages/web/src/server/auth/email.ts`
-- Middleware/instrumentation are minimal; extend as needed.
-# Lucidiant (InsiderWire) 🧠
-
-An AI-powered document processing and chat application with RAG (Retrieval-Augmented Generation) capabilities and visual workflow automation. Transform your business data into actionable insights through natural language queries and automated data pipelines.
-
-## 🚀 Features
-
-### 📄 Document Intelligence
-- **Universal Document Processing**: Support for PDFs, Word docs, PowerPoints, spreadsheets, and more via `markitdown` and `docling`
-- **OCR Capabilities**: Extract text from images and scanned documents
-- **Smart Chunking**: Intelligent text segmentation for optimal retrieval
-- **Vector Embeddings**: Powered by OpenAI embeddings and Qdrant vector database
-- **RAG Chat System**: Ask questions about your documents in natural language
-
-### 🔄 Visual Workflow Builder (FlowBuilder)
-Build visual data pipelines with 60+ pre-built integrations:
-
-- **Storage & Databases**: AWS S3, PostgreSQL, MongoDB, BigQuery, Snowflake, Redis, Elasticsearch
-- **Documentation**: Google Drive, Notion, Confluence, Microsoft 365, Dropbox, Box
-- **Development**: GitHub, GitLab, Jira, Linear, Asana, Trello, CircleCI, Jenkins
-- **Communication**: Slack, Microsoft Teams, Discord, Gmail, Zoom, Google Meet
-- **CRM & Sales**: Salesforce, HubSpot, Zendesk, Intercom, Pipedrive
-- **Analytics & BI**: Google Analytics, Tableau, PowerBI, Looker, Mixpanel, Segment
-- **Logic & Control**: AI transforms, filters, conditions, loops, delays, merges
-
-### 🏢 Enterprise Features
-- **Multi-tenant Architecture**: Organization-based access control
-- **User Management**: Invitations, roles, and permissions
-- **Authentication**: Secure auth system with Better-auth
-- **Real-time Chat**: Streaming AI responses with source attribution
-- **Knowledge Graphs**: Neo4j-powered relationship mapping
-
-## 🛠 Technology Stack
-
-- **Frontend**: Next.js 15, React 19, TypeScript, Tailwind CSS
-- **Backend**: Python FastAPI, Node.js Lambda functions
+- **Frontend**: Next.js 15, React, TypeScript, Tailwind CSS + DaisyUI
+- **Backend**: SST v3 with AWS Lambda cron jobs
 - **Database**: PostgreSQL with Drizzle ORM
-- **Vector DB**: Qdrant for embeddings storage
-- **Graph DB**: Neo4j for knowledge graphs
-- **Infrastructure**: AWS (SST v3), S3, SQS, Lambda
-- **AI/ML**: OpenAI GPT models, LangChain, embeddings
-- **Auth**: Better-auth with organization support
-- **Package Manager**: pnpm workspaces
-- **Deployment**: SST v3 (Serverless Stack Toolkit)
+- **API**: tRPC for type-safe API endpoints
+- **Authentication**: Better Auth with session-based authentication
 
-## 📁 Project Structure
+### Key Features
 
-```
-├── packages/
-│   ├── core/                 # Core business logic, database schemas, domain models
-│   ├── core-web/            # Shared UI components, auth, tRPC routers
-│   ├── web/                 # Next.js web application
-│   ├── ext/                 # Chrome extension (development/may be abandoned)
-│   ├── functions/           # AWS Lambda functions for background processing
-├── infra/                   # SST infrastructure configuration
-├── insiderwire/                # Python FastAPI backend for document processing
-└── [Root workspace files]
-```
+- ✅ **Comprehensive Test Coverage**: Unit tests for SEC parser, scoring engine, and Slack formatters
+- ✅ **Authentication Protected**: All dashboard routes and API endpoints require authentication
+- ✅ **Rate Limiting**: Built-in SEC API rate limiting (10 req/sec)
+- ✅ **Real-time Alerts**: Urgent Slack notifications for high-score transactions
+- ✅ **Daily Digests**: Automated end-of-day summaries
 
-### Package Details
+### System Components
 
-- **`@insiderwire/core`**: Database schemas (Drizzle), domain logic, AI utilities, queue handlers
-- **`core-web`**: Shared React components, authentication, tRPC API routers, UI library
-- **`web`**: Main Next.js application with dashboard, chat interface, and workflow builder
-- **`ext`**: Browser extension for content extraction (currently under development)
-- **`functions`**: Serverless functions for document processing, embeddings, webhooks
+1. **SEC EDGAR Integration** (`packages/core/src/domain/sec/`)
+   - API client for polling Form 4 filings
+   - XML parser for extracting transaction data
+   - Rate limiting (10 req/sec per SEC guidelines)
 
-## 🚀 Quick Start
+2. **Scoring Engine** (`packages/core/src/domain/scoring/`)
+   - Base score: Buy (+1), Sell (-1)
+   - Size multiplier: log10(value / $10,000)
+   - Role multiplier: 1.5× for CEO/CFO/Chairman
+   - First activity bonus: +1 for first trade in 180+ days
+   - Cluster bonus: +1 per additional insider trading same ticker within 7 days
+
+3. **Processing Pipeline** (`packages/core/src/domain/pipeline/`)
+   - Form 4 ingestion and parsing
+   - Transaction scoring and database persistence
+   - Deduplication handling for amended filings
+   - Urgent alert detection and posting
+
+4. **Slack Integration** (`packages/core/src/domain/slack/`)
+   - Webhook client for posting messages
+   - Rich formatting with Slack Block Kit
+   - Threaded daily digests
+
+5. **Web Dashboard** (`packages/web/src/app/dashboard/`)
+   - Homepage with recent high-score transactions
+   - Filterable transaction list (by ticker, date, score)
+   - Ticker detail pages with 90-day stats
+   - Transaction detail pages with SEC filing links
+
+6. **Infrastructure** (`infra/`)
+   - Form 4 processor cron (every 2 hours)
+   - Daily digest cron (6 PM ET)
+   - SST v3 AWS deployment configuration
+
+## Database Schema
+
+### Tables
+
+- **issuers**: Companies that file Form 4
+  - CIK, ticker, company name
+
+- **insiders**: Reporting owners (scoped per issuer)
+  - Name, title, issuer relationship
+
+- **transactions**: Individual Form 4 transactions
+  - Date, code (P/S), shares, price, ownership type
+  - Signal score, 10b5-1 plan indicator
+  - Dedupe constraint on (filing, insider, date, shares, price)
+
+- **slack_alerts**: Audit log of posted alerts
+  - Transaction ID, alert type, Slack message timestamp
+
+## Quick Start
 
 ### Prerequisites
 
-- Node.js 18+ and pnpm
-- Python 3.11+ with UV
-- Docker and Docker Compose
-- AWS CLI configured
-- PostgreSQL (local via Docker or remote)
+- Node.js 22+
+- PostgreSQL database
+- AWS account (for deployment)
+- Slack workspace with webhook URL
 
 ### 1. Clone and Install
 
 ```bash
-git clone [repository-url]
-cd insiderwire
+git clone <repository-url>
+cd InsiderWire
 pnpm install
 ```
 
-### 2. Environment Setup
+### 2. Configure Environment
 
-Create environment files:
+Create `.env.dev` in the root directory:
+
 ```bash
-# Copy example env files (you'll need to create these)
-cp .env.example .env.dev
-cp packages/core/.env.example packages/core/.env.dev
+# Database
+DB_URL=postgres://user:password@host:port/insiderwire
+
+# Slack
+SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/WEBHOOK/URL
+
+# SEC EDGAR (required by SEC - use your company/contact info)
+SEC_EDGAR_USER_AGENT=YourCompany contact@example.com
+
+# Auth (for web dashboard)
+BETTER_AUTH_SECRET=your-secret-key-here
+RESEND_API_KEY=your-resend-key-here
 ```
 
-Required environment variables:
-- `OPENAI_API_KEY` - OpenAI API key
-- `QDRANT_URL` & `QDRANT_API_KEY` - Qdrant vector database
-- `DB_URL` - PostgreSQL connection string
-- `BETTER_AUTH_SECRET` - Authentication secret
-- `RESEND_API_KEY` - Email service (optional)
-- AWS credentials for deployment
+### 3. Set up Database
 
-### 3. Database Setup
+Generate and run migrations:
 
 ```bash
-# Start local PostgreSQL with Docker
-pnpm --filter @insiderwire/core db:nuke:up
-
-# Run database migrations
-pnpm --filter @insiderwire/core db:migrate:local
+cd packages/core
+DATABASE_URL="<your-db-url>" npx drizzle-kit generate
+DATABASE_URL="<your-db-url>" npx drizzle-kit migrate
 ```
 
-### 4. Development
+### 4. Configure Slack Webhook
+
+1. Go to your Slack workspace settings
+2. Navigate to "Incoming Webhooks"
+3. Create a new webhook for your desired channel
+4. Copy the webhook URL to `.env.dev`
+
+### 5. Run Locally
 
 ```bash
-# Start development environment (Next.js app + SST)
+# Start development server
 pnpm dev
 
-# Start development for specific stage
-pnpm dev:adam
-
-# Type checking across all packages
-pnpm typecheck
-
-# Run tests
-pnpm --filter @insiderwire/core test
+# View dashboard
+open http://localhost:3000/dashboard
 ```
 
-### 5. Chrome Extension Development (Optional)
+### 6. Deploy to AWS
 
 ```bash
-# Build and watch extension
-pnpm dev:ext
+# Deploy to dev stage
+pnpm sst deploy
 
-# Load dist_chrome/ folder as unpacked extension in Chrome
-```
-
-## 📋 Common Development Commands
-
-### Database Operations
-```bash
-# Reset database and run migrations
-pnpm --filter @insiderwire/core db:nuke:up:migrate
-
-# Generate new migration
-pnpm --filter @insiderwire/core db:generate:migrations
-
-# Run migrations on production
-pnpm db:migrate:prod
-```
-
-### Deployment
-```bash
 # Deploy to production
-pnpm deploy:prod
-
-# Deploy to staging
-pnpm deploy:adam
+pnpm sst deploy --stage production
 ```
 
-### Package-specific Commands
-```bash
-# Run specific package commands
-pnpm --filter @insiderwire/core [command]
-pnpm --filter web [command]
-pnpm --filter ext [command]
+## Usage
+
+### Slack Alerts
+
+#### Urgent Alerts
+
+Triggered when:
+- Signal score magnitude ≥ 5.0, OR
+- Transaction value ≥ $250,000
+
+Alert includes:
+- Ticker and company name
+- Insider name and title
+- Transaction details (shares, price, value)
+- Signal score with emoji indicator
+- Holdings change percentage
+- 10b5-1 plan indicator (if applicable)
+- Link to SEC Form 4 filing
+
+#### Daily Digest
+
+Posted once per day at 6 PM ET with:
+- Summary stats (total transactions, ticker count)
+- Grouped by ticker
+- Top 3 insiders per ticker
+- Aggregate buy/sell counts and total value
+
+### Web Dashboard
+
+#### Homepage (`/dashboard`)
+- Recent high-score transactions (past 7 days)
+- Quick access to transaction details
+
+#### All Transactions (`/dashboard/insiders`)
+- Filterable list of all transactions
+- Filters: ticker, min score, date range
+- Paginated results
+
+#### Ticker Detail (`/dashboard/ticker/:symbol`)
+- 90-day statistics
+- Buy/sell ratio
+- Total transaction value
+- Average signal score
+- Recent transaction list
+
+#### Transaction Detail (`/dashboard/transaction/:id`)
+- Complete transaction information
+- Insider details
+- Post-transaction holdings
+- Direct link to SEC Form 4 filing
+
+## Signal Score Examples
+
+### Strong Buy Signal (+7.5)
+- CEO buys $500k worth of stock
+- First purchase in 6+ months
+- 2 other executives also bought within past week
+- Score: (1 + 1 + 2) × log10(500000/10000) × 1.5 = 7.05
+
+### Strong Sell Signal (-6.0)
+- CFO sells $1M worth of stock
+- Direct ownership
+- Score: (-1) × log10(1000000/10000) × 1.5 = -6.0
+
+## Project Structure
+
+```
+packages/
+├── core/                    # Core domain logic
+│   ├── src/
+│   │   ├── domain/
+│   │   │   ├── sec/         # SEC EDGAR integration
+│   │   │   ├── scoring/     # Signal score calculator
+│   │   │   ├── slack/       # Slack client & formatters
+│   │   │   └── pipeline/    # Processing orchestration
+│   │   └── sql/
+│   │       ├── schema/      # Database schema
+│   │       └── queries/     # Database queries
+│   └── drizzle.config.ts
+├── core-web/                # Web-specific logic (tRPC)
+│   └── src/trpc/routers/
+│       └── insiders/        # Insider transactions API
+├── web/                     # Next.js frontend
+│   └── src/
+│       ├── app/dashboard/   # Dashboard pages
+│       └── components/      # React components
+└── functions/               # Lambda handlers
+    ├── form4-processor.ts
+    └── daily-digest.ts
+
+infra/                       # SST infrastructure
+├── config.ts                # Secrets configuration
+├── jobs.ts                  # Cron job definitions
+└── nextPage.ts              # Next.js app config
 ```
 
-## 🏗 Development Workflow
+## Testing
 
-### Adding New Features
-
-1. **Domain Logic**: Add core functionality to `packages/core/src/domain/`
-2. **Database Changes**: 
-   - Update schemas in `packages/core/src/sql/schema/`
-   - Generate migrations: `pnpm --filter @insiderwire/core db:generate:migrations`
-3. **API Endpoints**: Add tRPC routers in `packages/core-web/src/trpc/routers/`
-4. **UI Components**: Create reusable components in `packages/core-web/src/components/`
-5. **Pages**: Add Next.js pages/routes in `packages/web/src/app/`
-
-### Code Organization
-
-- **Database**: Drizzle schemas in `packages/core/src/sql/schema/`
-- **tRPC API**: Routers in `packages/core-web/src/trpc/routers/`
-- **UI Components**: Shared components in `packages/core-web/src/components/`
-- **Domain Logic**: Business logic in `packages/core/src/domain/`
-- **Background Jobs**: Lambda functions in `packages/functions/src/`
-
-## 🧪 Testing
+### Running Tests
 
 ```bash
 # Run all tests
 pnpm test
 
-# Run core package tests with SST shell
-pnpm --filter @insiderwire/core test
+# Run tests for specific package
+pnpm --filter @starter/core test
 
-# Run tests in specific package
-pnpm --filter [package-name] test
+# Run tests in watch mode
+pnpm --filter @starter/core test -- --watch
 ```
 
-## 🚀 Deployment
+### Test Coverage
 
-### Staging
+The project includes comprehensive test suites for:
+
+#### SEC Parser Tests (`packages/core/src/domain/sec/parser.test.ts`)
+- ✅ Valid Form 4 parsing (buy and sell transactions)
+- ✅ 10b5-1 plan detection from footnotes
+- ✅ Transaction filtering (P/S only)
+- ✅ Direct vs indirect ownership
+- ✅ Missing optional fields handling
+- ✅ Multiple transaction types
+
+#### Scoring Engine Tests (`packages/core/src/domain/scoring/calculator.test.ts`)
+- ✅ Base score calculations (buy vs sell)
+- ✅ Size multiplier (logarithmic scaling)
+- ✅ Role multiplier (CEO/CFO/Chairman = 1.5×)
+- ✅ First activity bonus (+1 for 180+ days)
+- ✅ Cluster bonus (multiple insiders)
+- ✅ Urgent alert thresholds ($250k or |score| ≥ 5.0)
+- ✅ Holdings delta calculations
+- ✅ Real-world scenario examples
+
+#### Slack Formatter Tests (`packages/core/src/domain/slack/formatters.test.ts`)
+- ✅ Urgent alert message formatting
+- ✅ Daily digest formatting
+- ✅ Holdings delta display
+- ✅ 10b5-1 plan indicators
+- ✅ SEC filing links
+- ✅ Missing field handling
+
+### Test Examples
+
+```typescript
+// Example: Testing scoring calculation
+it("should match example: Strong Buy Signal", () => {
+  const input: ScoreInput = {
+    transactionCode: "P",
+    transactionValue: 500_000,
+    insiderTitle: "CEO",
+    isFirstActivityIn180Days: true,
+    additionalInsidersInCluster: 2,
+  };
+
+  const result = calculateSignalScore(input);
+
+  // (1 + 1 + 2) × log10(50) × 1.5 ≈ 10.20
+  expect(result.score).toBeCloseTo(10.2, 1);
+});
+```
+
+## Authentication
+
+### User Authentication
+
+All dashboard routes and API endpoints are protected by Better Auth:
+
+#### Middleware Protection
+- **Next.js Middleware** (`packages/web/src/middleware.ts`) - Redirects unauthenticated users to sign-in
+- Public routes: `/`, `/auth/sign-in`, `/auth/sign-up`
+- Protected routes: `/dashboard/*`, `/onboarding/*`
+
+#### API Protection
+- **tRPC Procedures** - All `insiders.*` endpoints use `protectedProcedure`
+- Returns `UNAUTHORIZED` error if no valid session
+- Session validated via Better Auth
+
+#### User Flow
+1. User visits `/dashboard` without authentication
+2. Middleware detects no session
+3. Redirects to `/auth/sign-in?callbackUrl=/dashboard`
+4. After sign-in, user is redirected back to original URL
+5. Protected tRPC endpoints verify session on every request
+
+### Creating Your First User
+
 ```bash
-pnpm deploy:adam
+# Start the dev server
+pnpm dev
+
+# Visit http://localhost:3000/auth/sign-up
+# Create an account with email/password
+# You'll be redirected to /dashboard
 ```
 
-### Production
+## SEC Compliance
+
+- User-Agent header required for all SEC requests (identifies your application)
+- Rate limit: 10 requests per second (enforced by client)
+- Respect SEC's fair access policy
+- Form 4 filings are public information
+
+## Troubleshooting
+
+### Tests Failing
+
+If tests fail after installation:
 ```bash
-pnpm deploy:prod
+# Ensure dependencies are installed
+pnpm install
+
+# Run tests with verbose output
+pnpm --filter @starter/core test -- --reporter=verbose
 ```
 
-The application uses SST v3 for infrastructure as code, automatically provisioning:
-- AWS Lambda functions
-- S3 buckets for document storage  
-- SQS queues for background processing
-- CloudFront distribution
-- Route 53 DNS (if configured)
+### Authentication Issues
 
-## 🔧 Troubleshooting
+If you're redirected to sign-in repeatedly:
+1. Check that `BETTER_AUTH_SECRET` is set in `.env.dev`
+2. Clear browser cookies for localhost
+3. Check browser console for errors
+4. Verify database migrations ran successfully
 
-### Common Issues
+### Database Connection
 
-1. **Database Connection Issues**
-   ```bash
-   # Reset local database
-   pnpm --filter @insiderwire/core db:nuke:up:migrate
-   ```
+If you can't connect to the database:
+```bash
+# Check PostgreSQL is running
+docker ps
 
-2. **TypeScript Errors**
-   ```bash
-   # Run type checking
-   pnpm typecheck
-   ```
+# Test connection
+psql "postgres://postgres:postgres@localhost:5937/insiderwire"
 
-3. **Build Issues**
-   ```bash
-   # Clean and reinstall dependencies
-   rm -rf node_modules packages/*/node_modules
-   pnpm install
-   ```
-
-4. **SST Deployment Issues**
-   - Ensure AWS credentials are configured
-   - Check stage name matches your environment
-   - Verify all required environment variables are set
-
-## 📚 Documentation
-
-- **CLAUDE.md**: Detailed project documentation for AI development assistance
-- **API Documentation**: tRPC routes are self-documenting via TypeScript
-- **Component Documentation**: Storybook setup (if configured)
-
-## 🤝 Contributing
-
-1. Follow TypeScript strict mode
-2. Use Biome for formatting and linting
-3. Write tests for new functionality
-4. Update database schemas through migrations
-5. Follow the existing package structure
-
-## 🔐 Security
-
-- Authentication handled by Better-auth
-- Organization-based multi-tenancy
-- API routes protected by authentication middleware
-- Environment variables for sensitive configuration
-- AWS IAM roles for least-privilege access
-
-# How to start as a new developer:
-
-1. Install [pnpm](https://pnpm.io/installation)
-2. Install [Docker](https://www.docker.com/) or [orbstack](https://orbstack.dev/pricing)
-3. To create a database run:
-`
+# Recreate database if needed
 cd packages/core
-pnpm run db:up && pnpm run db:migrate:local
-`
-4. Configure your aws account. You will need Access Key to manager resources on AWS. This project requires AWS account to run it locally.
-5. Create .env.dev file in top level folder:
-`
-DATABASE_URL=postgres://postgres:postgres@localhost:5937/insiderwire
-BETTER_AUTH_URL=https://localhost:3000
-BETTER_AUTH_SECRET=ABB8qCQN85Gw6WsfDzadjlS7jjGgpY6yRBCb1WXLURjwpoi1mtwLZbNNu0KBg3SgRfuce5GOJeSweuDAeQ
-`
-6. Create new script in packages.json
-`
-"dev:[your_name]": "dotenvx run -f .env.dev -- sst dev --stage [your_name]",
-`
-7. You should be able to run `pnpm i && pnpm dev` to run the project.
+pnpm run db:nuke:up:migrate
+```
 
+## License
 
-# Useful resources:
-- Kanban with tasks: https://github.com/users/adamszeptycki/projects/2/views/1
+MIT
 
 ---
 

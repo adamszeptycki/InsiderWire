@@ -10,3 +10,8 @@ export const resendApiKey = new sst.Secret(
 	"RESEND_API_KEY",
 	"resend-api-placeholder-key",
 );
+export const slackWebhookUrl = new sst.Secret("SLACK_WEBHOOK_URL", "");
+export const secEdgarUserAgent = new sst.Secret(
+	"SEC_EDGAR_USER_AGENT",
+	"InsiderWire support@example.com",
+);

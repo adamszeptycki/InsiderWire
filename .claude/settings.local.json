@@ -4,7 +4,8 @@
       "Bash(pnpm typecheck:*)",
       "Bash(pnpm install:*)",
       "Bash(pnpm --filter @starter/core test)",
-      "Bash(pnpm test:*)"
+      "Bash(pnpm test:*)",
+      "Bash(pnpm db:generate:migrations:*)"
     ],
     "deny": []
   }

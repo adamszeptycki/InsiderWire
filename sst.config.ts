@@ -12,6 +12,7 @@ export default $config({
   async run() {
     await import("./infra/config");
     await import("./infra/router");
+    await import("./infra/jobs");
     const { nextJsPage } = await import("./infra/nextPage");
     return {
       nextJsPage: nextJsPage.url,
